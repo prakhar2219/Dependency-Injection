@@ -5,8 +5,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+    //Field Injection
+    @Inject
+    lateinit var userRegistrationService: UserRegistrationService
+    @Inject
+    lateinit var emailService: EmailService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -17,9 +23,12 @@ class MainActivity : AppCompatActivity() {
 //        val userRegistrationService=UserRegistrationService(userRepository,emailService)
 
         //Dagger Injection
+
         val component=DaggerUserRegistrationComponent.builder().build()
-        val userRegistrationService=component.getUserRegistrationService()
-        val emailService=component.getEmailService()
+component.Inject(this)
+//        val userRegistrationService=component.getUserRegistrationService()
+//        val emailService=component.getEmailService()
+
         userRegistrationService.registerUser("Prakhar","1111")
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
