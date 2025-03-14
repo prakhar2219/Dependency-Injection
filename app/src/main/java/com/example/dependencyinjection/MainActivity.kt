@@ -24,7 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         //Dagger Injection
 
-        val component=DaggerUserRegistrationComponent.builder().build()
+        val component=DaggerUserRegistrationComponent.builder()
+            .notificationServiceModule(NotificationServiceModule(3))
+            .build()
 component.Inject(this)
 //        val userRegistrationService=component.getUserRegistrationService()
 //        val emailService=component.getEmailService()
